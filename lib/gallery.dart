@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'dart:io';
 
 class Gallery extends StatefulWidget {
   const Gallery({super.key});
@@ -60,7 +62,7 @@ class _ListImgs extends State<Gallery> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           // timeInSecForIosWeb: 0,
-          backgroundColor: Colors.pink[300],
+          backgroundColor: Colors.blue[300],
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
@@ -156,7 +158,7 @@ class _ListImgs extends State<Gallery> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 3,
-          backgroundColor: Colors.pink[300],
+          backgroundColor: Colors.blue[300],
           textColor: Colors.white,
           fontSize: 16.0);
     } catch (error) {
@@ -192,6 +194,23 @@ class _ListImgs extends State<Gallery> {
     }
   }
 
+  Future<void> playSoundDelete() async {
+    final AudioPlayer audioPlayerDownload = AudioPlayer();
+    await audioPlayerDownload.play(AssetSource(
+        '/sounds/delete.mp3')); // Cambia la ruta al archivo de sonido
+  }
+
+  Future<void> playSoundFavorite() async {
+    final AudioPlayer audioPlayerDownload = AudioPlayer();
+    await audioPlayerDownload.play(AssetSource(
+        '/sounds/favorite.mp3')); // Cambia la ruta al archivo de sonido
+  }
+
+  Future<void> playSoundDownload() async {
+    AudioPlayer audioPlayerDownload = AudioPlayer();
+    await audioPlayerDownload.play(AssetSource('/sounds/download.mp3'));
+  }
+
   /// Componente para la card
   miCardImage(item) {
     return Card(
@@ -224,6 +243,7 @@ class _ListImgs extends State<Gallery> {
                   icon: const Icon(Icons.favorite_border_outlined),
                   onPressed: () {
                     saveFavorites(item);
+                    playSoundFavorite();
                   },
                 ),
               ),
@@ -233,6 +253,7 @@ class _ListImgs extends State<Gallery> {
                   icon: const Icon(Icons.download),
                   onPressed: () {
                     download(item);
+                    playSoundDownload();
                   },
                 ),
               ),
@@ -275,6 +296,7 @@ class _ListImgs extends State<Gallery> {
                     icon: const Icon(Icons.favorite),
                     onPressed: () {
                       removeFavorite(json.encode(item));
+                      playSoundDelete();
                     }),
               ),
               Container(
@@ -283,6 +305,7 @@ class _ListImgs extends State<Gallery> {
                   icon: const Icon(Icons.download),
                   onPressed: () {
                     download(item);
+                    playSoundDownload();
                   },
                 ),
               ),
@@ -349,7 +372,8 @@ class _ListImgs extends State<Gallery> {
           },
         ),
       ]),
-      body: Center(
+      body: Container(
+        color: Colors.white,
         child: _widgetOptions(_selectedIndex)[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(

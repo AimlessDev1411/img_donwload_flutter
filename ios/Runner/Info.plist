@@ -51,5 +51,9 @@
 	<string>My description about why I need this capability</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>My description about why I need this capability</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 </dict>
 </plist>
