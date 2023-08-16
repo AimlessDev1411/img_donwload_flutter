@@ -60,7 +60,7 @@ class _ListImgs extends State<Gallery> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           // timeInSecForIosWeb: 0,
-          backgroundColor: Colors.blue[400],
+          backgroundColor: Colors.pink[300],
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
@@ -156,7 +156,7 @@ class _ListImgs extends State<Gallery> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 3,
-          backgroundColor: Colors.green[400],
+          backgroundColor: Colors.pink[300],
           textColor: Colors.white,
           fontSize: 16.0);
     } catch (error) {
